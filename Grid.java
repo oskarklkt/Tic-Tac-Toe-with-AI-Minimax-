@@ -19,6 +19,14 @@ public class Grid {
         this.signsList = signsStringToList();
     }
 
+    public String getSigns() {
+        return signs;
+    }
+
+    public List<String> getSignsList() {
+        return signsList;
+    }
+
     public List<String> signsStringToList() {
         return new ArrayList<>(List.of(signs.replaceAll("_", " ").split("")));
     }
