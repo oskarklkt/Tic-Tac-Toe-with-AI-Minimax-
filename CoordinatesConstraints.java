@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,11 +19,11 @@ public abstract class CoordinatesConstraints {
     }
 
     public static boolean isInputValid(String input) {
+        char[] chars = input.toCharArray();
         try {
-            Scanner scanner = new Scanner(input);
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-            return true;
+            boolean isFirstDigit = Character.isDigit(chars[0]);
+            boolean isSecondDigit = Character.isDigit(chars[2]);
+            return isSecondDigit && isFirstDigit && input.length() == 3;
         } catch (Exception e) {
             return false;
         }

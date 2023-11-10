@@ -52,14 +52,13 @@ public abstract class ResultChecker {
 
     public static boolean check(Grid grid) {
         String result = getResult(grid);
-        if (!result.isEmpty() ) {
+        if (!result.isEmpty() && !result.equals(" ")) {
             System.out.printf("%s wins\n", result);
             return true;
         } else if (!grid.getSignsList().contains(" ")) {
             System.out.println("Draw");
             return true;
         } else {
-            System.out.println("Game not finished");
             return false;
         }
     }
