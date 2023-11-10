@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Computer {
-    public static String sign = "O";
+public class Computer {
+    public String sign;
 
-    public static void easyMove(Grid grid) {
+    public Computer(String sign) {
+        this.sign = sign;
+    }
+
+
+    public void easyMove(Grid grid) {
         System.out.println("Making move level \"easy\"");
         List<String> signsList = grid.getSignsList();
         List<Integer> onlyNotOccupied = new ArrayList<>();

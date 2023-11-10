@@ -3,9 +3,12 @@ package tictactoe;
 import java.util.Collections;
 import java.util.Scanner;
 
-public abstract class Player {
-    public static String sign = "X";
-    public static void move(Grid grid) {
+public class Player {
+    public String sign;
+    public Player(String sign) {
+        this.sign = sign;
+    }
+    public void move(Grid grid) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the coordinates: ");
         String coordinates = scanner.nextLine();
