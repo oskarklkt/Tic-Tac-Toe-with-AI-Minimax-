@@ -38,5 +38,10 @@ public class Grid {
             System.out.printf("%s %s %s", signsList.get(i), signsList.get(i + 1), signsList.get(i + 2));
             System.out.println(" |");
         }
+        System.out.println("---------");
+    }
+
+    public void updateGrid(int y, int x, String sign) {
+        signsList.set(y * 3 - 3 + x - 1, sign);
     }
 }

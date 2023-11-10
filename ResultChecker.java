@@ -2,37 +2,40 @@ package tictactoe;
 
 import java.util.List;
 
-public class ResultChecker {
-    private String checkDiagonally(Grid grid) {
+public abstract class ResultChecker {
+    private static String checkDiagonally(Grid grid) {
         List<String> gridList = grid.getSignsList();
         if (    (gridList.get(0).equals(gridList.get(4)) && gridList.get(4).equals(gridList.get(8))) ||
-                (gridList.get(2).equals(gridList.get(4)) && gridList.get(4).equals(gridList.get(6)))) {
+                (gridList.get(2).equals(gridList.get(4)) && gridList.get(4).equals(gridList.get(6))) &&
+                !gridList.get(4).equals(" ")){
             return gridList.get(4);
         }
         return "";
     }
 
-    private String checkVertically(Grid grid) {
+    private static String checkVertically(Grid grid) {
         List<String> gridList = grid.getSignsList();
         for (int i = 0; i <= 2; i++) {
-            if ((gridList.get(i).equals(gridList.get(i + 3)) && (gridList.get(i + 3).equals(gridList.get(i + 6))))) {
+            if ((gridList.get(i).equals(gridList.get(i + 3)) && (gridList.get(i + 3).equals(gridList.get(i + 6))))&&
+                    !gridList.get(i).equals(" ")) {
                 return gridList.get(i);
             }
         }
         return "";
     }
 
-    private String checkHorizontally(Grid grid) {
+    private static String checkHorizontally(Grid grid) {
         List<String> gridList = grid.getSignsList();
         for (int i = 0; i <= 6; i += 3) {
-            if ((gridList.get(i).equals(gridList.get(i + 1)) && (gridList.get(i + 1).equals(gridList.get(i + 2))))) {
+            if ((gridList.get(i).equals(gridList.get(i + 1)) && (gridList.get(i + 1).equals(gridList.get(i + 2)))) &&
+            !gridList.get(i).equals(" ")){
                 return gridList.get(i);
             }
         }
         return "";
     }
 
-    private String getResult(Grid grid) {
+    private static String getResult(Grid grid) {
         String vertically = checkVertically(grid);
         String horizontally = checkHorizontally(grid);
         String diagonally = checkDiagonally(grid);
@@ -47,12 +50,12 @@ public class ResultChecker {
         }
     }
 
-    public boolean check(Grid grid) {
+    public static boolean check(Grid grid) {
         String result = getResult(grid);
-        if (!result.isEmpty() && grid.getSignsList().contains(" ")) {
+        if (!result.isEmpty() ) {
             System.out.printf("%s wins\n", result);
             return true;
-        } else if (!grid.getSignsList().contains(" ") && result.isEmpty()) {
+        } else if (!grid.getSignsList().contains(" ")) {
             System.out.println("Draw");
             return true;
         } else {
