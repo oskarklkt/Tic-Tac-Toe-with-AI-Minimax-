@@ -44,4 +44,26 @@ public class Grid {
     public void updateGrid(int y, int x, String sign) {
         signsList.set(y * 3 - 3 + x - 1, sign);
     }
+
+    public List<List<String>> getRowsList() {
+        List<List<String>> result = new ArrayList<>();
+        result.set(0, signsList.subList(0, 3));
+        result.set(1, signsList.subList(3, 6));
+        result.set(2, signsList.subList(6, 9));
+        return result;
+    }
+
+    public List<List<String>> getCollumnsList() {
+        List<List<String>> result = new ArrayList<>();
+        List<List<String>> rows = getRowsList();
+        for (int i = 0; i <= 2; i++) {
+            List<String> temp = new ArrayList<>();
+            for (List<String> row : rows) {
+                temp.add(row.get(i));
+            }
+            result.set(0, temp);
+        }
+        return result;
+    }
+        
 }
