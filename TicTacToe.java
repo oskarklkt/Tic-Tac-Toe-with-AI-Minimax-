@@ -10,7 +10,7 @@ public class TicTacToe {
             if (ResultChecker.check(grid)) {
                 System.exit(0);
             } else {
-                computer.easyMove(grid);
+                computer.move(grid);
             }
         }
     }
@@ -28,11 +28,11 @@ public class TicTacToe {
 
     public static void play(Grid grid, Computer computer1, Computer computer2) {
         while (!ResultChecker.check(grid)) {
-            computer1.easyMove(grid);
+            computer1.move(grid);
             if (ResultChecker.check(grid)) {
                 System.exit(0);
             } else {
-                computer2.easyMove(grid);
+                computer2.move(grid);
             }
         }
     }
@@ -47,10 +47,16 @@ public class TicTacToe {
             if (commandSplit[0].equals("start") && commandSplit[1].equals("user") && commandSplit[2].equals("user")) {
                 play(grid, new Player("X"), new Player("O"));
             } else if (commandSplit[0].equals("start") && commandSplit[1].equals("easy") && commandSplit[2].equals("easy")) {
-                play(grid, new Computer("X"), new Computer("O"));
+                play(grid, new Computer("X", "easy"), new Computer("O", "easy"));
             } else if ((commandSplit[0].equals("start") && commandSplit[1].equals("user") && commandSplit[2].equals("easy")) ||
                     commandSplit[1].equals("easy") && commandSplit[2].equals("user")) {
-                play(grid, new Player("X"), new Computer("O"));
+                play(grid, new Player("X"), new Computer("O", "easy"));
+            } else if (commandSplit[0].equals("start") && ((commandSplit[1].equals("user") && commandSplit[2].equals("medium")) ||
+                    (commandSplit[1].equals("medium") && commandSplit[2].equals("user")))) {
+                play(grid, new Player("X"), new Computer("O", "medium"));
+            } else if(commandSplit[0].equals("start") && ((commandSplit[1].equals("easy") && commandSplit[2].equals("medium")) ||
+                    (commandSplit[1].equals("medium") && commandSplit[2].equals("easy")))) {
+                play(grid, new Computer("X", "easy"), new Computer("O", "medium"));
             } else {
                 System.out.println("Bad parameters!");
                 TicTacToe.main(new String[]{});

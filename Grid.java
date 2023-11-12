@@ -47,15 +47,21 @@ public class Grid {
 
     public List<List<String>> getRowsList() {
         List<List<String>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        result.add(new ArrayList<>());
+        result.add(new ArrayList<>());
         result.set(0, signsList.subList(0, 3));
         result.set(1, signsList.subList(3, 6));
         result.set(2, signsList.subList(6, 9));
         return result;
     }
 
-    public List<List<String>> getCollumnsList() {
+    public List<List<String>> getColumnsList() {
         List<List<String>> result = new ArrayList<>();
         List<List<String>> rows = getRowsList();
+        result.add(new ArrayList<>());
+        result.add(new ArrayList<>());
+        result.add(new ArrayList<>());
         for (int i = 0; i <= 2; i++) {
             List<String> temp = new ArrayList<>();
             for (List<String> row : rows) {
@@ -65,5 +71,5 @@ public class Grid {
         }
         return result;
     }
-        
+
 }
