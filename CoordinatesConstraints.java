@@ -1,9 +1,8 @@
 package tictactoe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+
 
 public abstract class CoordinatesConstraints {
     public static boolean checkIfCorrectCoordinates (int y, int x) {

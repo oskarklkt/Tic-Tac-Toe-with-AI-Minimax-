@@ -6,19 +6,29 @@ import java.util.List;
 import java.util.Random;
 
 public class Computer {
-    private String sign;
-    private String difficulty;
+    private final String sign;
+    private final String difficulty;
+    private final String oppositeSign;
 
     public Computer(String sign, String difficulty) {
         this.sign = sign;
         this.difficulty = difficulty;
+        if (sign.equals("X")) {
+            this.oppositeSign = "O";
+        } else {
+            this.oppositeSign = "X";
+        }
     }
+
+
 
     public void move(Grid grid) {
         if (difficulty.equals("easy")) {
             easyMove(grid);
         } else if (difficulty.equals("medium")) {
             mediumMove(grid);
+        } else {
+            hardMove(grid);
         }
     }
 
@@ -102,4 +112,67 @@ public class Computer {
         }
 
     }
+
+    public void hardMove(Grid grid) {
+        int bestScore = Integer.MIN_VALUE;
+        int[] move = new int[2];
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if ((grid.getRowsList().get(y)).get(x).equals(" ")) {
+                    grid.updateGrid(y + 1, x + 1, sign);
+                    int score = minimax(grid, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    grid.updateGrid(y + 1, x + 1, " ");
+                    if (score > bestScore) {
+                        bestScore = score;
+                        move[0] = y;
+                        move[1] = x;
+                    }
+                }
+            }
+        }
+        grid.updateGrid(move[0] + 1, move[1] + 1, sign);
+    }
+
+    public int minimax(Grid grid, boolean isMaximizing, int alpha, int beta) {
+        if (ResultChecker.check(grid)) {
+            return 1;
+        }
+
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    if ((grid.getRowsList().get(y)).get(x).equals(" ")) {
+                        grid.updateGrid(y + 1, x + 1, sign);
+                        int score = minimax(grid, false, alpha, beta);
+                        grid.updateGrid(y + 1, x + 1, " ");
+                        bestScore = Math.max(score, bestScore);
+                        alpha = Math.max(bestScore, alpha);
+                        if (beta <= alpha) {
+                            break;
+                        }
+                    }
+                }
+            }
+            return bestScore;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    if ((grid.getRowsList().get(y)).get(x).equals(" ")) {
+                        grid.updateGrid(y + 1, x + 1, oppositeSign);
+                        int score = minimax(grid, true, alpha, beta);
+                        grid.updateGrid(y + 1, x + 1, " ");
+                        bestScore = Math.min(score, bestScore);
+                        beta = Math.min(bestScore, beta);
+                        if (beta <= alpha) {
+                            break;
+                        }
+                    }
+                }
+            }
+            return bestScore;
+        }
+    }
+
 }

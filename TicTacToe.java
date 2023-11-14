@@ -1,6 +1,6 @@
 package tictactoe;
 
-import java.util.Collections;
+
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -57,7 +57,12 @@ public class TicTacToe {
             } else if(commandSplit[0].equals("start") && ((commandSplit[1].equals("easy") && commandSplit[2].equals("medium")) ||
                     (commandSplit[1].equals("medium") && commandSplit[2].equals("easy")))) {
                 play(grid, new Computer("X", "easy"), new Computer("O", "medium"));
-            } else {
+            } else if ((commandSplit[0].equals("start") && ((commandSplit[1].equals("user") && commandSplit[2].equals("hard")) ||
+                    (commandSplit[1].equals("hard") && commandSplit[2].equals("user"))))){
+                play(grid, new Player("O"), new Computer("X", "hard"));
+            }else if (commandSplit[0].equals("start") && ((commandSplit[1].equals("hard") && commandSplit[2].equals("hard")))){
+                play(grid, new Computer("X", "hard"), new Computer("O", "hard"));
+            }else {
                 System.out.println("Bad parameters!");
                 TicTacToe.main(new String[]{});
             }
