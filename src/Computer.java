@@ -133,6 +133,8 @@ public class Computer {
         grid.updateGrid(move[0] + 1, move[1] + 1, sign);
     }
 
+
+    //minimax implementation
     public int minimax(Grid grid, boolean isMaximizing, int alpha, int beta) {
         if (ResultChecker.check(grid)) {
             return 1;
